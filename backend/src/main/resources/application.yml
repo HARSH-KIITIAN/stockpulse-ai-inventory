@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: stockpulse-backend
+  datasource:
+    url: jdbc:h2:mem:stockpulse;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  port: 8080
+
+commerce:
+  strategy: ${COMMERCE_STRATEGY:RULE_BASED}
+  demand-spike-multiplier: ${DEMAND_SPIKE_MULTIPLIER:3.0}
+
+llm:
+  enabled: ${LLM_ENABLED:false}
+  provider: ${LLM_PROVIDER:litellm}
+  base-url: ${LLM_BASE_URL:https://litellm-qc.zycus.net}
+  api-key: ${LLM_API_KEY:}
+  model: ${LLM_MODEL:gpt-5.6-luna-azure-payg-global}
+  product: ${LLM_PRODUCT:PC1}
+
+stockpulse:
+  seed:
+    enabled: ${SEED_DATA_ENABLED:false}
